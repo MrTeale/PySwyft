@@ -56,12 +56,10 @@ setup(name='pyswyft',
       license='MIT',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
       test_suite='tests',
-        include_package_data=True,
-        zip_safe=False, 
-        install_requires=[
-            'requests'
-        ],
-        entry_points="""
-        # -*- Entry points: -*-
-        """,
-        )
+      include_package_data=True,
+      zip_safe=False, 
+      install_requires=requirements,
+      entry_points="""
+      # -*- Entry points: -*-
+      """,
+      )
