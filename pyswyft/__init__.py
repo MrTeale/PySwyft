@@ -4,7 +4,7 @@ from .exceptions import PySwyftError
 
 
 __title__ = 'pyswyft'
-__version__ = '0.1.0'
+__version__ = '0.2.0'
 __author__ = 'Lachlan Teale'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2020 Lachlan Teale'
