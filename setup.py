@@ -34,11 +34,11 @@ if sys.argv[-1] == 'publish':
 setup(name='pyswyft',
       version=version, 
       description="Python wrapper for Swyftx API",
-      long_description=read_all("README.rst"),
+      long_description=read_all("README.md"),
       classifiers=[
         'License :: OSI Approved :: MIT License',
         'Intended Audience :: Developers',
-        'Intended Audience :: Financial and Insurance Industry'
+        'Intended Audience :: Financial and Insurance Industry',
         'Operating System :: OS Independent',
         'Development Status :: 3 - Alpha',
         'Natural Language :: English',
