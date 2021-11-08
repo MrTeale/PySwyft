@@ -105,7 +105,8 @@ class API(object):
         requests_args.update(self.request_params)
 
         # Which API to access?
-        url = "{}/{}".format(TRADING_ENVIRONMENTS[self.environment], endpoint)
+        url = "{}/{}".format(TRADING_ENVIRONMENTS[self.environment], endpoint.ENDPOINT)
+        print(url)
         response = self._request(method, url, requests_args, headers=headers)
         content = response.content.decode('utf-8')
         content = json.loads(content)
