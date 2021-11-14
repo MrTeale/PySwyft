@@ -7,16 +7,13 @@ from abc import abstractmethod
 class Accounts(APIRequest):
     """Accounts - class to handle the accounts endpoints"""
 
-    ENDPOINT = ""
-    METHOD = "GET"
-
     @abstractmethod
     def __init__(self):
         endpoint = self.ENDPOINT.format()
         super(Accounts, self).__init__(endpoint, method=self.METHOD)
 
 
-@endpoint('user/')
+@endpoint('user/', "GET")
 class AccountDetails(Accounts):
     """Send a request to Swyftx Profile API endpoint
 
@@ -143,7 +140,7 @@ class AccountSettings(Accounts):
         self.data = {'data': data}
 
 
-@endpoint('user/verification/')
+@endpoint('user/verification/', "GET")
 class AccountVerificationInfo(Accounts):
     """Send a request to Swyftx Verification API endpoint
 
@@ -190,7 +187,7 @@ class AccountStartVerificationEmail(Accounts):
         super(AccountStartVerificationEmail, self).__init__()
 
 
-@endpoint('user/verification/email/')
+@endpoint('user/verification/email/', "GET")
 class AccountCheckVerificationEmail(Accounts):
     """Send a request to Swyftx Check Email Verification API endpoint
 
@@ -211,7 +208,7 @@ class AccountCheckVerificationEmail(Accounts):
         super(AccountCheckVerificationEmail, self).__init__()
 
 
-@endpoint('user/verification/phone/')
+@endpoint('user/verification/phone/', "GET")
 class AccountCheckVerificationPhone(Accounts):
     """Send a request to Swyftx Check Phone Verification API endpoint
 
@@ -262,7 +259,7 @@ class AccountStartVerificationPhone(Accounts):
         self.params = {'token': token}
 
 
-@endpoint('user/affiliations/')
+@endpoint('user/affiliations/', "GET")
 class AccountAffiliations(Accounts):
     """Send a request to Swyftx Get Affiliation Info API endpoint
 
@@ -282,7 +279,7 @@ class AccountAffiliations(Accounts):
         super(AccountAffiliations, self).__init__()
 
 
-@endpoint('user/balance/')
+@endpoint('user/balance/', "GET")
 class AccountBalance(Accounts):
     """Send a request to Swyftx Get Account Balances API endpoint
 
@@ -324,7 +321,7 @@ class AccountCurrency(Accounts):
         self.data = {"profile": { "defaultAsset": asset_number}}
 
 
-@endpoint('user/statistics/')
+@endpoint('user/statistics/', "GET")
 class AccountStatistics(Accounts):
     """Send a request to Swyftx Account Statistics API endpoint
 
@@ -346,7 +343,7 @@ class AccountStatistics(Accounts):
         super(AccountStatistics, self).__init__()
 
 
-@endpoint('user/progress/')
+@endpoint('user/progress/', "GET")
 class AccountProgress(Accounts):
     """Send a request to Swyftx Account Progress API endpoint
 
@@ -370,7 +367,7 @@ class AccountProgress(Accounts):
         super(AccountProgress, self).__init__()
 
 
-@endpoint('user/promotions/')
+@endpoint('user/promotions/', "GET")
 class AccountPromotions(Accounts):
     """Send a request to Swyftx Set Currency API endpoint
 
@@ -391,7 +388,7 @@ class AccountPromotions(Accounts):
         super(AccountPromotions, self).__init__()
 
 
-@endpoint('user/taxReport/')
+@endpoint('user/taxReport/', "GET")
 class AccountTaxReport(Accounts):
     """Send a request to Swyftx Get Tax Report API endpoint
 
