@@ -5,10 +5,7 @@ from abc import abstractmethod
 
 
 class Orders(APIRequest):
-    """Orders - class to handle the orders endpoints"""
-
-    ENDPOINT = ""
-    METHOD = "GET"
+    """Orders - class to handle the Orders endpoints"""
 
     @abstractmethod
     def __init__(self):
@@ -16,7 +13,7 @@ class Orders(APIRequest):
         super(Orders, self).__init__(endpoint, method=self.METHOD)
 
 
-@endpoint('orders/rate/')
+@endpoint('orders/rate/', 'GET')
 class OrdersExchangeRate(Orders):
     """OrdersExchangeRate - class to handle the orders exchange rate endpoints"""
     def __init__(self, buy, sell, amount=None, limit=None):
@@ -32,7 +29,7 @@ class OrdersExchangeRate(Orders):
         self.data = data
 
 
-@endpoint('orders/')
+@endpoint('orders/', 'GET')
 class OrdersListAll(Orders):
     """OrdersListAll - class to handle the orders list all endpoint"""
     def __init__(self, asset_code="", limit=None, page=None):
@@ -41,7 +38,7 @@ class OrdersListAll(Orders):
         self.params = {'limit': limit, 'page': page}
 
 
-@endpoint('orders/byId/')
+@endpoint('orders/byId/', 'GET')
 class OrdersGetOrder(Orders):
     """OrdersGetOrder - class to handle the specific order endpoint"""
     def __init__(self, orderID):

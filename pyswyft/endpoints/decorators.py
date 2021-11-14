@@ -1,6 +1,6 @@
 """ Decorators """
 
-def endpoint(url, method="GET", expected_status=200):
+def endpoint(url, method='GET', expected_status=200):
     """
     Decorator for endpoints.
     """
@@ -18,8 +18,8 @@ def abstractclass(cls):
 
     Ensures that the class is abstract and cannot be used directly.
     """
-    setattr(cls, "_ISNEVER", cls.__bases__[0].__name__)
-    origInit = cls.__dict__["__init__"]
+    setattr(cls, '_ISNEVER', cls.__bases__[0].__name__)
+    origInit = cls.__dict__['__init__']
 
     def wrapInit(self, *args, **kwargs):
         # When a class if instantiated we can check for bases
@@ -28,12 +28,12 @@ def abstractclass(cls):
             assert self.__class__.__bases__[-1].__name__ != cls._ISNEVER
             origInit(self, *args, **kwargs)
         except AssertionError:
-            raise TypeError("Abstract classes cannot be instantiated directly")
+            raise TypeError('Abstract classes cannot be instantiated directly')
     
     # replace the original __init__ with the wrapped one
-    setattr(wrapInit, "__doc__", getattr(origInit, "__doc__"))
-    setattr(origInit, "__doc__", "")
-    setattr(cls, "__init__", wrapInit)
+    setattr(wrapInit, '__doc__', getattr(origInit, '__doc__'))
+    setattr(origInit, '__doc__', '')
+    setattr(cls, '__init__', wrapInit)
 
     return cls
 
@@ -50,7 +50,7 @@ def extendargs(object):
     
     def __call__(self, cls):
         # save parent class __init__
-        origInit = cls.__bases__[0].__dict__["__init__"]
+        origInit = cls.__bases__[0].__dict__['__init__']
 
         def wrapInit(wself, *args, **kwargs):
             for extraArg in self.loa:
@@ -58,6 +58,6 @@ def extendargs(object):
                     setattr(wself, extraArg, kwargs[extraArg])
                     del kwargs[extraArg]
             origInit(wself, *args, **kwargs)
-        setattr(cls, "__init__", wrapInit)
+        setattr(cls, '__init__', wrapInit)
 
         return cls

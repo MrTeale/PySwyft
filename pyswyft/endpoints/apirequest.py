@@ -9,7 +9,7 @@ class APIRequest(object):
     """ Base Class for API-request classes"""
 
     @abstractmethod
-    def __init__(self, endpoint, method="GET", expected_status=200):
+    def __init__(self, endpoint, method='GET', expected_status=200):
         """"""
         self._expected_status = expected_status
         self._status_code = None
@@ -29,7 +29,7 @@ class APIRequest(object):
     @status_code.setter
     def status_code(self, value):
         if value != self._expected_status:
-            raise ValueError("{} {} {:d}".format(self, self.method, value))
+            raise ValueError('{} {} {:d}'.format(self, self.method, value))
             
         self._status_code = value
     

@@ -5,10 +5,7 @@ from abc import abstractmethod
 
 
 class History(APIRequest):
-    """History - class to handle the accounts endpoints"""
-
-    ENDPOINT = ""
-    METHOD = "GET"
+    """History - class to handle the History endpoints"""
 
     @abstractmethod
     def __init__(self):
@@ -16,25 +13,25 @@ class History(APIRequest):
         super(History, self).__init__(endpoint, method=self.METHOD)
 
 
-@endpoint('history/withdraw/')
+@endpoint('history/withdraw/', 'GET')
 class HistoryCurrencyWithdraw(History):
     """HistoryCurrencyWithdraw - class to handle the curreny withdraw endpoints"""
     def __init__(self, asset_code, limit=None, page=None, sortby=None):
         super(HistoryCurrencyWithdraw, self).__init__()
-        self.ENDPOINT = self.ENDPOINT + str(asset_code) + "/"
+        self.ENDPOINT = self.ENDPOINT + str(asset_code) + '/'
         self.params = {'limit': limit, 'page': page, 'sortby': sortby}
 
 
-@endpoint('history/deposit/')
+@endpoint('history/deposit/', 'GET')
 class HistoryCurrencyDeposit(History):
     """HistoryCurrencyDeposit - class to handle the curreny deposit endpoints"""
     def __init__(self, asset_code, limit=None, page=None, sortby=None):
         super(HistoryCurrencyDeposit, self).__init__()
-        self.ENDPOINT = self.ENDPOINT + str(asset_code) + "/"
+        self.ENDPOINT = self.ENDPOINT + str(asset_code) + '/'
         self.params = {'limit': limit, 'page': page, 'sortby': sortby}
 
 
-@endpoint('history/withdraw/')
+@endpoint('history/withdraw/', 'GET')
 class HistoryAllWithdraw(History):
     """HistoryAllWithdraw - class to handle the curreny withdraw endpoints"""
     def __init__(self, limit=None, page=None, sortby=None):
@@ -42,7 +39,7 @@ class HistoryAllWithdraw(History):
         self.params = {'limit': limit, 'page': page, 'sortby': sortby}
 
 
-@endpoint('history/deposit/')
+@endpoint('history/deposit/', 'GET')
 class HistoryAllDeposit(History):
     """HistoryAllDeposit - class to handle the curreny deposit endpoints"""
     def __init__(self, limit=None, page=None, sortby=None):
@@ -50,16 +47,16 @@ class HistoryAllDeposit(History):
         self.params = {'limit': limit, 'page': page, 'sortby': sortby}
 
 
-@endpoint('history/all/')
+@endpoint('history/all/', 'GET')
 class HistoryAll(History):
     """HistoryAll - class to handle the all history endpoints"""
     def __init__(self, type, assetId, limit=None, page=None, sortby=None):
         super(HistoryAll, self).__init__()
-        self.ENDPOINT = self.ENDPOINT + str(type) + "/" + str(assetId) + "/"
+        self.ENDPOINT = self.ENDPOINT + str(type) + '/' + str(assetId) + '/'
         self.params = {'limit': limit, 'page': page, 'sortby': sortby}
 
 
-@endpoint('history/affiliate/')
+@endpoint('history/affiliate/', 'GET')
 class HistoryAffiliate(History):
     """HistoryAffiliate - class to handle the affiliate history endpoints"""
     def __init__(self, limit=None, page=None, sortby=None):

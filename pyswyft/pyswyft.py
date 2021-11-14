@@ -21,19 +21,19 @@ class API(object):
     """"""
     def __init__(self, api_key, environment='demo', headers=None, request_params=None):
         """"""
-        logger.info("setting up API-client for environment %s", environment)
+        logger.info('setting up API-client for environment %s', environment)
 
         try:
             TRADING_ENVIRONMENTS[environment]
         except KeyError:
-            logger.error("invalid environment specified: %s", environment)
-            raise KeyError("invalid environment specified: %s" % environment)
+            logger.error('invalid environment specified: %s', environment)
+            raise KeyError('invalid environment specified: %s' % environment)
         else:
             self.environment = environment
         
         self.api_key = api_key
         self.client = requests.Session()
-        self.access_token = json.loads(self.client.post("https://api.swyftx.com.au/auth/refresh/", headers=headers, data={'apiKey': self.api_key}).text)['accessToken']
+        self.access_token = json.loads(self.client.post('https://api.swyftx.com.au/auth/refresh/', headers=headers, data={'apiKey': self.api_key}).text)['accessToken']
         self._request_params = request_params if request_params else {}
 
         # personal token authentication
@@ -66,15 +66,15 @@ class API(object):
         headers = headers if headers else {}
         response = None
         try:
-            logger.info("requesting %s %s", method, url)
+            logger.info('requesting %s %s', method, url)
             response = func(url, headers=headers, **requests_args)
         except requests.exceptions.RequestException as e:
-            logger.error("request %s failed: %s", url, e)
+            logger.error('request %s failed: %s', url, e)
             raise e
         
         # Handle error responses
         if response.status_code >= 400:
-            logger.error("request %s failed: [%d, %s]", url, response.status_code, response.content.decode('utf-8'))
+            logger.error('request %s failed: [%d, %s]', url, response.status_code, response.content.decode('utf-8'))
             raise PySwyftError(response.status_code, response.content.decode('utf-8'))
     
         return response
@@ -87,14 +87,14 @@ class API(object):
         params = None
 
         try:
-            params =getattr(endpoint, "params")
+            params =getattr(endpoint, 'params')
         except AttributeError:
             # request does not have params
             params = {}
         
         headers = {}
-        if hasattr(endpoint, "HEADERS"):
-            headers = getattr(endpoint, "HEADERS")
+        if hasattr(endpoint, 'HEADERS'):
+            headers = getattr(endpoint, 'HEADERS')
 
         requests_args = {}
         if method == 'get':
@@ -106,7 +106,7 @@ class API(object):
         requests_args.update(self.request_params)
 
         # Which API to access?
-        url = "{}/{}".format(TRADING_ENVIRONMENTS[self.environment], endpoint.ENDPOINT)
+        url = '{}/{}'.format(TRADING_ENVIRONMENTS[self.environment], endpoint.ENDPOINT)
         print(url)
         response = self._request(method, url, requests_args, headers=headers)
         content = response.content.decode('utf-8')
