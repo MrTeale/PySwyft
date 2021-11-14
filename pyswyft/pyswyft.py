@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 class API(object):
     """"""
-    def __init__(self, access_token, environment='demo', headers=None, request_params=None):
+    def __init__(self, api_key, environment='demo', headers=None, request_params=None):
         """"""
         logger.info("setting up API-client for environment %s", environment)
 
@@ -31,8 +31,9 @@ class API(object):
         else:
             self.environment = environment
         
-        self.access_token = access_token
+        self.api_key = api_key
         self.client = requests.Session()
+        self.access_token = json.loads(self.client.post("https://api.swyftx.com.au/auth/refresh/", headers=headers, data={'apiKey': self.api_key}).text)['accessToken']
         self._request_params = request_params if request_params else {}
 
         # personal token authentication
