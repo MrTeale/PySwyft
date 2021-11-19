@@ -35,6 +35,3 @@ class CandlesGetLatestBar(Candles):
 
         self.ENDPOINT = self.ENDPOINT + str(primary) + '/' + str(secondary) + '/' + str(side) + '/'
         self.params = {'resolution': resolution}
-
-# https://api.swyftx.com.au/charts/getBars/AUD/ETH/ask/?resolution=4h&timeEnd=1637058005000&timeStart=1616321945000 - GET
-# https://api.swyftx.com.au/charts/getLatestBar/AUD/ETH/ask/?resolution=4h - GET
