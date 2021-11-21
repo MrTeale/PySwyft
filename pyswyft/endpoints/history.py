@@ -15,7 +15,29 @@ class History(APIRequest):
 
 @endpoint('history/withdraw/', 'GET')
 class HistoryCurrencyWithdraw(History):
-    """HistoryCurrencyWithdraw - class to handle the curreny withdraw endpoints"""
+    """Send a request to Swyftx Currency Withdraw History API Endpoint
+
+    Docs: https://docs.swyftx.com.au/#/reference/history/currency-withdraw-history/get-currency-withdraw-history
+    URL: https://api.swyftx.com.au/history/withdraw/
+    Method: GET
+
+    Args:
+        asset_code (str): The asset code to get the history for.
+        limit (int): The number of results to return.
+        page (int): The page number to return.
+        sortby (str): The field to sort the results by.
+
+    Returns:
+        List of Withdraw events for a Currency.
+        e.g.
+        {
+            "id": 1,
+            "time": 1517458855347,
+            "quantity": "1231.123",
+            "address_id": 1,
+            "status": 1
+        }
+    """
     def __init__(self, asset_code, limit=None, page=None, sortby=None):
         super(HistoryCurrencyWithdraw, self).__init__()
         self.ENDPOINT = self.ENDPOINT + str(asset_code) + '/'
@@ -24,7 +46,29 @@ class HistoryCurrencyWithdraw(History):
 
 @endpoint('history/deposit/', 'GET')
 class HistoryCurrencyDeposit(History):
-    """HistoryCurrencyDeposit - class to handle the curreny deposit endpoints"""
+    """Send a request to Swyftx Currency Deposit History API Endpoint
+
+    Docs: https://docs.swyftx.com.au/#/reference/history/currency-deposit-history/get-currency-deposit-history
+    URL: https://api.swyftx.com.au/history/deposit/
+    Method: GET
+
+    Args:
+        asset_code (str): The asset code to get the history for.
+        limit (int): The number of results to return.
+        page (int): The page number to return.
+        sortby (str): The field to sort the results by.
+
+    Returns:
+        List of Deposit events for a Currency.
+        e.g.
+        {
+            "id": 1,
+            "time": 1517458855347,
+            "quantity": "1231.123",
+            "address_id": 1,
+            "status": 1
+        }
+    """
     def __init__(self, asset_code, limit=None, page=None, sortby=None):
         super(HistoryCurrencyDeposit, self).__init__()
         self.ENDPOINT = self.ENDPOINT + str(asset_code) + '/'
@@ -33,7 +77,28 @@ class HistoryCurrencyDeposit(History):
 
 @endpoint('history/withdraw/', 'GET')
 class HistoryAllWithdraw(History):
-    """HistoryAllWithdraw - class to handle the curreny withdraw endpoints"""
+    """Send a request to Swyftx Currency All Withdraw History API Endpoint
+
+    Docs: https://docs.swyftx.com.au/#/reference/history/all-withdraw-history/get-all-withdraw-history
+    URL: https://api.swyftx.com.au/history/withdraw/
+    Method: GET
+
+    Args:
+        limit (int): The number of results to return.
+        page (int): The page number to return.
+        sortby (str): The field to sort the results by.
+
+    Returns:
+        List of All Withdraw events.
+        e.g.
+        {
+            "id": 1,
+            "time": 1517458855347,
+            "quantity": "1231.123",
+            "address_id": 1,
+            "status": 1
+        }
+    """
     def __init__(self, limit=None, page=None, sortby=None):
         super(HistoryAllWithdraw, self).__init__()
         self.params = {'limit': limit, 'page': page, 'sortby': sortby}
@@ -41,7 +106,28 @@ class HistoryAllWithdraw(History):
 
 @endpoint('history/deposit/', 'GET')
 class HistoryAllDeposit(History):
-    """HistoryAllDeposit - class to handle the curreny deposit endpoints"""
+    """Send a request to Swyftx Currency All Deposit History API Endpoint
+
+    Docs: https://docs.swyftx.com.au/#/reference/history/all-deposit-history/get-all-deposit-history
+    URL: https://api.swyftx.com.au/history/deposit/
+    Method: GET
+
+    Args:
+        limit (int): The number of results to return.
+        page (int): The page number to return.
+        sortby (str): The field to sort the results by.
+
+    Returns:
+        List of All Deposit events.
+        e.g.
+        {
+            "id": 1,
+            "time": 1517458855347,
+            "quantity": "1231.123",
+            "address_id": 1,
+            "status": 1
+        }
+    """
     def __init__(self, limit=None, page=None, sortby=None):
         super(HistoryAllDeposit, self).__init__()
         self.params = {'limit': limit, 'page': page, 'sortby': sortby}
@@ -49,7 +135,39 @@ class HistoryAllDeposit(History):
 
 @endpoint('history/all/', 'GET')
 class HistoryAll(History):
-    """HistoryAll - class to handle the all history endpoints"""
+    """Send a request to Swyftx Currency All History API Endpoint
+
+    Docs: https://docs.swyftx.com.au/#/reference/history/currency-deposit-history/get-history
+    URL: https://api.swyftx.com.au/history/all/
+    Method: GET
+
+    Args:
+        type (str): The type of history to get.
+        assetId (str): The asset code to get the history for.
+        limit (int): The number of results to return.
+        page (int): The page number to return.
+        sortby (str): The field to sort the results by.
+
+    Returns:
+        List of All events.
+        e.g.
+        [
+            {
+                "asset": "5",
+                "amount": 1.234,
+                "updated": 15326574115,
+                "actionType": "Deposit",
+                "status": "Failed"
+            },
+            {
+                "asset": "1",
+                "amount": 1.234,
+                "updated": 15326574115,
+                "actionType": "Withdrawal",
+                "status": "Pending"
+            }
+        ]
+    """
     def __init__(self, type, assetId, limit=None, page=None, sortby=None):
         super(HistoryAll, self).__init__()
         self.ENDPOINT = self.ENDPOINT + str(type) + '/' + str(assetId) + '/'
@@ -58,7 +176,30 @@ class HistoryAll(History):
 
 @endpoint('history/affiliate/', 'GET')
 class HistoryAffiliate(History):
-    """HistoryAffiliate - class to handle the affiliate history endpoints"""
+    """Send a request to Swyftx Currency All affiliate API Endpoint
+
+    Docs: https://docs.swyftx.com.au/#/reference/history/affiliate-payout-history/get-affiliate-payout-history
+    URL: https://api.swyftx.com.au/history/affiliate/
+    Method: GET
+
+    Args:
+        limit (int): The number of results to return.
+        page (int): The page number to return.
+        sortby (str): The field to sort the results by.
+
+    Returns:
+        List of All Deposit events for a Currency.
+        e.g.
+        [
+            {
+                "asset": "36",
+                "amount": "1",
+                "updated": "1600055580000",
+                "actionType": "Affiliate Payout",
+                "status": 1
+            }
+        ]
+    """
     def __init__(self, limit=None, page=None, sortby=None):
         super(HistoryAffiliate, self).__init__()
         self.params = {'limit': limit, 'page': page, 'sortby': sortby}
